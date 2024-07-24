@@ -5,7 +5,6 @@ int cnt;
 bool isuse[15]={0,};
 bool isuse_L[30]={0,};
 bool isuse_R[30]={0,};
-bool stop=false;
 void queen(int k)
 {
     if(k==n)
@@ -15,12 +14,7 @@ void queen(int k)
     }
     for(int i=0;i<n;i++)
     {
-        stop=false;
-        if(!isuse[i]){
-        	for(int j=k;j<n;j++)
-	            if(isuse_R[i+k]||isuse_L[n-i-1+k])
-                    stop=true;
-            if(stop)continue;
+        if(!(isuse[i]||isuse_R[i+k]||isuse_L[n-1-i+k])){
             isuse_R[i+k]=true;
             isuse_L[n-1-i+k]=true;
             isuse[i]=true;
