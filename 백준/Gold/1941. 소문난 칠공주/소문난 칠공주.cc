@@ -1,5 +1,4 @@
 #include<iostream>
-#include<queue>
 #include<vector>
 using namespace std;
 
@@ -8,28 +7,33 @@ bool vis[5][5];
 int cnt;
  int dx[4]={-1,0,1,0};
  int dy[4]={0,-1,0,1};
+ int tmp;
+
+bool dfs_visited[6][6];
+void dfs(int r, int c)
+{
+    dfs_visited[r][c] = true;
+	for (int i = 0; i < 4; i++)
+	{
+		int nr = r + dx[i];
+		int nc = c + dy[i];
+		if (nr < 0 || nr >= 5 || nc < 0 || nc >= 5) continue;
+		if (!vis[nr][nc]) continue;
+		if (dfs_visited[nr][nc]) continue;
+
+		tmp++;
+		dfs(nr, nc);
+	}
+}
+
+void reset()
+{
+	fill_n(&dfs_visited[0][0], 6 * 6, 0);
+}
 bool isconnect(vector<pair<int,int>>& select){
-    int tmp=0;
-    bool vised[5][5]={false};
-	queue<pair<int,int>> q;
-    q.push(select[0]);
-    vised[select[0].first][select[0].second]=true;
-    while(!q.empty())
-    {
-        tmp++;
-        pair<int,int> cur = q.front();
-        q.pop();
-        for(int i=0;i<4;i++)
-        {
-            int nx=cur.first+dx[i];
-            int ny=cur.second+dy[i];
-            if(nx<0||ny<0||nx>=5||ny>=5)continue;
-            if(vis[nx][ny]&&!vised[nx][ny]){
-                q.push({nx,ny});
-                vised[nx][ny]=true;
-           }
-        }
-    }
+    tmp=1;
+    reset();
+    dfs(select[0].first,select[0].second);
     return tmp==7;
 }
 
