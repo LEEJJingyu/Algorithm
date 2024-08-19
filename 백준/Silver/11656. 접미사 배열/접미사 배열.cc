@@ -16,10 +16,9 @@ int main(void) {
 	cin >> s;
 	for (int i = 0; i < s.size(); i++)
 	{
-		vector<char> t(s.begin()+i,s.end());
 		string tmp = "";
-		for (char c : t)
-			tmp += c;
+		for (int j=i;j<s.size();j++)
+			tmp += s[j];
 		v1.push(tmp);
 	}
 	while (!v1.empty())
