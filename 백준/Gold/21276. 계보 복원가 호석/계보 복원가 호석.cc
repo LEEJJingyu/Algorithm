@@ -54,14 +54,14 @@ int main()
 	for (auto cur : m)
 	{
 		cout << cur.first << ' ';
-		vector<int> tmp;
+		set<string> tmp;
 		for (int i : und[cur.second]) {
 			if (cnt[cur.second] + 1 == cnt[i])
-				tmp.push_back(i);
+				tmp.insert(arr[i]);
 		}
 		cout << tmp.size()<<' ';
-		for (int i : tmp)
-			cout << arr[i] << ' ';
+		for (string i : tmp)
+			cout << i << ' ';
 		cout << '\n';
 	}
 }
