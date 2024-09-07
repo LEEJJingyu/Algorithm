@@ -37,19 +37,19 @@ int main()
 		cnt[na]++;
 		deg[nb]++;
 	}
-	pair<int,vector<int>> ans;
+	pair<int,set<string>> ans;
 	
 	for (int i = 0; i < N; i++)
 	{
 		if (cnt[i] == 0)
 		{
 			ans.first++;
-			ans.second.push_back(i);
+			ans.second.insert(arr[i]);
 		}
 	}
 	cout << ans.first << '\n';
-	for (int i : ans.second)
-		cout << arr[i] << ' ';
+	for (string	 i : ans.second)
+		cout << i << ' ';
 	cout << '\n';
 	for (auto cur : m)
 	{
